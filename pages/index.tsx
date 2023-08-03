@@ -5,7 +5,6 @@ import styles from '@/styles/Home.module.css'
 import { useMachine } from '@xstate/react'
 import { myMachine } from '@/machine/myfistmachine'
 import { todoMachine } from '@/machine/mytodomachine'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -27,6 +26,25 @@ export default function Home() {
         {JSON.stringify(state.context)}
       </pre>
       </div> 
+      <div>
+        {state.matches('Todos Loaded') && (
+          <button onClick={() => {
+            send({
+              type:'Create new'
+            })
+          }}>
+            Create New
+          </button>
+        )}
+        {state.matches('Creating new todo.Showing form input') && (
+          <input onChange={e => {
+            send({
+              type: 'Form input changed',
+              value: e.target.value
+            })
+          }} type='text' />
+        )}
+      </div>
     </>
   )
 } 

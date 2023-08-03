@@ -19,6 +19,7 @@
         };
         eventsCausingActions: {
           "assignErrorToContext": "error.platform.todo.Loading Todos:invocation[0]";
+"assignFromInputToContext": "Form input changed";
 "assigntodosToContext": "done.invoke.todo.Loading Todos:invocation[0]";
         };
         eventsCausingDelays: {
@@ -30,7 +31,7 @@
         eventsCausingServices: {
           "loadTodos": "xstate.init";
         };
-        matchesStates: "Loading Todos" | "Loading todos Errored" | "Todos Loaded";
+        matchesStates: "Creating new todo" | "Creating new todo.Showing form input" | "Loading Todos" | "Loading todos Errored" | "Todos Loaded" | { "Creating new todo"?: "Showing form input"; };
         tags: never;
       }
   
