@@ -9,7 +9,7 @@ import { Itodos } from '@/machine/todoItems'
 import { Guid } from 'guid-typescript'
 const inter = Inter({ subsets: ['latin'] })
 
-
+const apiBaseUrl = 'https://hungry-ray-pinafore.cyclic.cloud';
 
 // Make the `request` function generic
 // to specify the return data type:
@@ -39,10 +39,10 @@ export default function Home() {
    const [state, send] = useMachine(todoMachine, {
     services: {
       loadTodos: async () => {
-       return await request<Itodos[]>('http://localhost:3004/posts');
+       return await request<Itodos[]>(`${apiBaseUrl}/posts`);
       },
        saveTodo: async (context, event) => { 
-         await request<void>('http://localhost:3004/posts', {
+         await request<void>(`${apiBaseUrl}/posts`, {
            method: 'POST',
            body: JSON.stringify(
              { 
@@ -58,7 +58,8 @@ export default function Home() {
        // todos.add(context.createNewTodoFormInput);
       },
        deleteTodo: async (context, event) => {
-         await request<void>('http://localhost:3004/posts/' + event.id, {
+         const delUrl = `${apiBaseUrl}/posts${event.id}`;
+         await request<void>(delUrl, {
            method: 'DELETE'
          });
        }
