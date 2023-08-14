@@ -58,7 +58,7 @@ export default function Home() {
        // todos.add(context.createNewTodoFormInput);
       },
        deleteTodo: async (context, event) => {
-         const delUrl = `${apiBaseUrl}/posts${event.id}`;
+         const delUrl = `${apiBaseUrl}/posts/${event.id}`;
          await request<void>(delUrl, {
            method: 'DELETE'
          });
