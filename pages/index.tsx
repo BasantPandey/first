@@ -60,7 +60,10 @@ export default function Home() {
        deleteTodo: async (context, event) => {
          const delUrl = `${apiBaseUrl}/posts/${event.id}`;
          await request<void>(delUrl, {
-           method: 'DELETE'
+           method: 'DELETE',
+           headers: {
+             "Access-Control-Allow-Origin":"*"
+           }
          });
        }
     },
